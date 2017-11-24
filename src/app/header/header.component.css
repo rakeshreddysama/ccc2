@@ -1,0 +1,46 @@
+.ccc-header {
+    background-color: #3C6BA1;
+    color: #FFFFFF;
+    border-radius: 0px
+}
+
+.header-brand {
+    margin-left: 0px;
+    font-size: 20px;
+}
+
+.header-icons {
+    padding-right: 15px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer
+}
+
+.header-form {
+    padding: 8px 15px 0px 15px;
+    margin-bottom: 0px
+}
+
+.header-right {
+    float: right;
+}
+
+.header-rigth-group {
+    width: 100%;
+    padding-top: 15px;
+}
+
+.header-form .input-group-addon {
+    background: white !important;
+}
+
+.header-form .form-control {
+    border-right: 0;
+    box-shadow: 0 0 0;
+    border-color: #ccc;
+}
+
+.header-form button {
+    border: 0;
+    background: transparent;
+}

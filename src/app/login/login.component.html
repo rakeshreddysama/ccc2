@@ -1,0 +1,14 @@
+<div>
+    <div class="wrapper">
+        <form action="" method="post" name="Login_Form" class="form-signin" (submit)="login(credentials)">
+            <h3 class="form-signin-heading">Please Log In</h3>
+            <hr class="colorgraph"><br>
+            <input class="form-control" type="text" name="username" [(ngModel)]="credentials.username" placeholder="Username">
+            <input class="form-control" type="password" name="password" [(ngModel)]="credentials.password" placeholder="Password">
+            <div [hidden]="!errorMessage" class="well error">{{ errorMessage }}</div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="authenticating">
+                <i class="fa fa-spin fa-spinner" *ngIf="authenticating"></i> <span>Log in</span>
+            </button>
+        </form>
+    </div>
+</div>

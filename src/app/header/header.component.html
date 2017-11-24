@@ -1,0 +1,31 @@
+<nav class="navbar ccc-header">
+    <div class="col-md-3">
+        <div class="navbar-header">
+            <div style="float:left">
+                <span class="fi-cisco" (click)="goHome()" style="cursor:pointer"></span>
+            </div>
+            <span class="navbar-brand header-brand">Cesium</span>
+        </div>
+    </div>
+    <div class="navbar-header col-md-5" *ngIf="isAuthenticated">
+        <form class="form-group input-group navbar-right header-form" (submit)="search()">
+            <input type="text" class="form-control" placeholder="Search Text" [(ngModel)]="searchText" name="searchText">
+            <span class="input-group-addon">
+				<button type="submit"> <span class="fi-search"></span> </button>
+            </span>
+        </form>
+        <!-- <div style="margin-top: -5px; text-align: right; margin-bottom: -5px;" aria-hidden="false" class="">
+            <a href="#" style="color: white !important;text-decoration: underline!important;font-size: smaller; border-bottom: 0px !important">click here for custom search</a>
+        </div> -->
+    </div>
+    <div class="col-md-4" *ngIf="isAuthenticated">
+        <div class="form-inline header-right">
+            <div class="input-group header-rigth-group">
+                <a class="header-icons">Rakesh Reddy</a>
+                <span class="fi-home home-icon header-icons"></span>
+                <span class="fiext-grid header-icons"></span>
+                <span class="fi-ring" href="# "></span>
+            </div>
+        </div>
+    </div>
+</nav>
