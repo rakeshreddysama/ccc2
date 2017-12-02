@@ -1,6 +1,7 @@
 import { AppConfigService } from '../global/app-config.service';
 import { AuthService } from '../global/auth.service';
 import { Component } from '@angular/core';
+import { UIRouter, StateService } from '@uirouter/angular';
 
 @Component({
 	selector: 'app-header',
@@ -14,7 +15,8 @@ export class HeaderComponent {
 	params;
 
 	constructor(appConfig: AppConfigService,
-		public authService: AuthService) {
+		private authService: AuthService,
+		private stateService: StateService) {
 		this.email = appConfig.emailAddress;
 		this.isAuthenticated = authService.isAuthenticated();
 	}
@@ -22,14 +24,13 @@ export class HeaderComponent {
 	goHome() {
 		// TODO: Implement the redirect to the Home Page
 		alert('you clicked on logo');
+		this.stateService.go('home');
 	}
 
 	search() {
 		// TODO: Implement the redirect to PolarisSearch Page
 		if (this.searchText !== '') {
-			alert('you entered ' + this.searchText);
-		} else {
-			alert('No Value entered');
+			this.stateService.go('cesium_search', { SI: this.searchText });
 		}
 	}
 }

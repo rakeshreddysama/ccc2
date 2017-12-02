@@ -6,7 +6,7 @@ export const snState: Ng2StateDeclaration = {
 	name: 'sn',
 	url: '/sn',
 	component: SNComponent
-}
+};
 
 export const SN_STATES = [
 	snState

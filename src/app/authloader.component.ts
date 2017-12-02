@@ -4,8 +4,8 @@ import { Component, OnInit } from '@angular/core';
 @Component({
 	selector: 'app-authloader',
 	template: `
-    <div class="home buttons">
-      Please wait while auth is being set
+    <div>
+      Please wait while the security is being applied
     </div>
 `,
 	styles: []
