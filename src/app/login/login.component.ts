@@ -1,3 +1,4 @@
+import { welcomeState } from './../app.states';
 import { Component, OnInit, Input } from '@angular/core';
 import { TargetState, StateService } from '@uirouter/core';
 import { AuthService } from '../global/auth.service';
@@ -20,6 +21,10 @@ export class LoginComponent {
 	constructor(private authService: AuthService,
 		private $state: StateService
 	) {
+		if (authService.isAuthenticated()) {
+			// User is Authenticated and trying to load login state.
+			$state.go('welcome');
+		}
 
 		this.credentials = {
 			username: '',

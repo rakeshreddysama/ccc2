@@ -15,7 +15,6 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 export class CSComponent implements OnInit {
 	@Input() searchInfo: Observable<SearchInfo>;
 	ngOnInit() {
-		// debugger;
 		this.searchInfo.subscribe(
 			res => {
 				debugger;

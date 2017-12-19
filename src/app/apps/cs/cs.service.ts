@@ -27,12 +27,10 @@ export class CSService {
 
 			return this.http.request(req)
 				.map((res: Response) => {
-					debugger;
 					const json_obj = res.json();
 					return deserialize(SearchInfo, json_obj['results'][0]);
 				})
 				.catch((error: any) => {
-					debugger;
 					return Observable.throw(error.json().error || 'Server Error');
 				});
 		}

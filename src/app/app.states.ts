@@ -74,24 +74,6 @@ export function returnTo($transition$: Transition): any {
 	return $state.target('home');
 }
 
-export const contactsFutureState = {
-	name: 'contacts.**',
-	url: '/contacts',
-	loadChildren: './apps/contacts/contacts.module#ContactsModule'
-};
-
-export const prefsFutureState = {
-	name: 'prefs.**',
-	url: '/prefs',
-	loadChildren: './apps/prefs/prefs.module#PrefsModule'
-};
-
-export const mymessagesFutureState = {
-	name: 'mymessages.**',
-	url: '/mymessages',
-	loadChildren: './apps/mymessages/mymessages.module#MymessagesModule'
-};
-
 export const cesiumSearchFutureState = {
 	name: 'cesium_search.**',
 	url: '/cesium_search',
@@ -103,8 +85,5 @@ export const APP_STATES = [
 	welcomeState,
 	homeState,
 	loginState,
-	contactsFutureState,
-	prefsFutureState,
-	mymessagesFutureState,
 	cesiumSearchFutureState
 ];
