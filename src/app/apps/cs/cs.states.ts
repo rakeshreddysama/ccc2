@@ -26,6 +26,22 @@ export const csState: Ng2StateDeclaration = {
 	data: { requiresAuth: true }
 };
 
+export const snFutureState = {
+	parent: 'cesium_search',
+	name: 'sn.**',
+	url: '/sn',
+	loadChildren: './sn/sn.module#SNModule'
+};
+
+export const pidFutureState = {
+	parent: 'cesium_search',
+	name: 'pid.**',
+	url: '/pid',
+	loadChildren: './pid/pid.module#PIDModule'
+};
+
 export const CS_STATES = [
-	csState
+	csState,
+	snFutureState,
+	pidFutureState
 ];

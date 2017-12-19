@@ -5,15 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { CSComponent } from './cs.component';
 import { CS_STATES } from './cs.states';
 import { UIRouterModule } from '@uirouter/angular';
-import { SNModule } from './sn/sn.module';
 
 @NgModule({
 	imports: [
 		UIRouterModule.forChild({
 			states: CS_STATES
 		}),
-		CommonModule,
-		SNModule
+		CommonModule
 	],
 	declarations: [
 		CSComponent
