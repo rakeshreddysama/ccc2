@@ -74,10 +74,16 @@ export function returnTo($transition$: Transition): any {
 	return $state.target('home');
 }
 
-export const cesiumSearchFutureState = {
+export const csFutureState = {
 	name: 'cesium_search.**',
 	url: '/cesium_search',
 	loadChildren: './apps/cs/cs.module#CSModule'
+};
+
+export const chmFutureState = {
+	name: 'host.**',
+	url: '/host',
+	loadChildren: './apps/chm/chm.module#CHMModule'
 };
 
 export const APP_STATES = [
@@ -85,5 +91,6 @@ export const APP_STATES = [
 	welcomeState,
 	homeState,
 	loginState,
-	cesiumSearchFutureState
+	csFutureState,
+	chmFutureState
 ];
