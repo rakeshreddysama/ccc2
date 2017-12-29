@@ -1,8 +1,12 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LocalStorage } from './util/localStorage';
 import { AuthLoaderComponent } from './authloader.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, RequestOptions } from '@angular/http';
+import { CustomInterceptor } from './custom-interceptor';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome.component';
@@ -32,10 +36,18 @@ import { HeaderComponent } from './header/header.component';
 		GlobalModule,
 		BrowserModule,
 		FormsModule,
-		HttpModule
+		HttpModule,
+		HttpClientModule
 	],
 	providers: [
-		{ provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }
+		{ provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader },
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: CustomInterceptor,
+			multi: true,
+		},
+		HttpClient,
+		LocalStorage
 	],
 	bootstrap: [UIView]
 })

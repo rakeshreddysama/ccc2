@@ -21,6 +21,14 @@ export const csState: Ng2StateDeclaration = {
 			},
 			policy: { async: 'WAIT', when: 'EAGER' },
 			deps: [CSService, Transition]
+		},
+		{
+			token: 'tabInfo',
+			resolveFn: (csServ: CSService) => {
+				return csServ.getTabInfo();
+			},
+			policy: { async: 'WAIT', when: 'EAGER' },
+			deps: [CSService]
 		}
 	],
 	data: { requiresAuth: true }

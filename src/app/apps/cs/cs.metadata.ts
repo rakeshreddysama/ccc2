@@ -1,4 +1,6 @@
+import { ITabInfo } from './cs.metadata';
 import { Injectable } from '@angular/core';
+import { JsonProperty } from 'json-typescript-mapper';
 
 export interface ISearchTypes {
 	line_id: String;
@@ -14,6 +16,14 @@ export interface ISearchTypes {
 	tracecode: String;
 }
 
+export interface ITabInfo {
+	display_name: String;
+	option: String;
+	pagetype: String;
+	username: String;
+	visible: String;
+}
+
 export class SearchInfo implements ISearchTypes {
 	constructor(public line_id: String = null,
 		public mac_address_sn: String = null,
@@ -26,5 +36,22 @@ export class SearchInfo implements ISearchTypes {
 		public sn_dev: String = null,
 		public sn_stage: String = null,
 		public tracecode: String = null) {
+	}
+}
+
+export class TabInfo implements ITabInfo {
+	constructor(public display_name: String = null,
+		public option: String = null,
+		public pagetype: String = null,
+		public username: String = null,
+		public visible: String = null) {
+	}
+}
+
+export class TabList {
+	@JsonProperty({ clazz: TabInfo, name: 'results' })
+	tabs: ITabInfo[];
+	constructor() {
+		this.tabs = void 0;
 	}
 }

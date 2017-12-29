@@ -1,4 +1,4 @@
-import { SearchInfo } from './cs.metadata';
+import { SearchInfo, TabList } from './cs.metadata';
 import { Observable } from 'rxjs/Rx';
 import { Component, Input } from '@angular/core';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
@@ -14,8 +14,17 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 )
 export class CSComponent implements OnInit {
 	@Input() searchInfo: Observable<SearchInfo>;
+	@Input() tabInfo: Observable<TabList[]>;
+	debugger;
 	ngOnInit() {
 		this.searchInfo.subscribe(
+			res => {
+				debugger;
+			},
+			err => {
+				debugger;
+			});
+		this.tabInfo.subscribe(
 			res => {
 				debugger;
 			},

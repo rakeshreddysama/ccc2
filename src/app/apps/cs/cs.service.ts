@@ -1,39 +1,58 @@
-import { deserialize } from 'json-typescript-mapper';
-import { SearchInfo } from './cs.metadata';
+import { baseUrl, ServiceTypes } from './../../util/util';
+import { LocalStorage } from './../../util/localStorage';
+import { deserialize, serialize } from 'json-typescript-mapper';
+import { SearchInfo, TabList } from './cs.metadata';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Http, Request, Response, Headers } from '@angular/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Subscriber } from 'rxjs/Subscriber';
 
 @Injectable()
 export class CSService {
-	constructor(private http: Http) { }
+	constructor(private http: HttpClient, private _ls: LocalStorage) { }
 
 	public searchSI(searchInfo: String): Observable<SearchInfo> {
-
 		if (searchInfo == null || searchInfo === '') {
 			return new Observable<SearchInfo>((subscriber: Subscriber<SearchInfo>) =>
 				subscriber.next(new SearchInfo())).map(o => o);
 		} else {
-			const _headers = new Headers({});
-			_headers.append('_csession', '67C8D652-583E-444B-BE16-D174019DCD66');
-			const req = new Request({
-				method: 'GET',
-				url: 'https://polarisweb3-stg.cisco.com/svclnx/cgi-bin/central_cs/services.py/searchdata/SAL1411D63G',
-				headers: _headers
-			});
+			let search_result: any = this._ls._get('cs~' + searchInfo);
+			if (search_result) {
+				return new Observable<SearchInfo>((subscriber: Subscriber<SearchInfo>) =>
+					subscriber.next(search_result)).map(o => o);
+			} else {
+				return this.http.request('GET', baseUrl(ServiceTypes.webpy) + 'central_cs/services.py/searchdata/SAL1411D63G')
+					.map((res: Response) => {
+						const resp = res['results'][0];
+						search_result = deserialize(SearchInfo, resp);
+						this._ls._set('cs~' + searchInfo, search_result);
+						return search_result;
+					})
+					.catch((error: any) => {
+						return Observable.throw(error.error || 'Server Error');
+					});
+			}
+		}
+	}
 
-			return this.http.request(req)
+	public getTabInfo(): Observable<TabList> {
+		let tabList: any = this._ls._get('tabList');
+		if (tabList) {
+			return new Observable<TabList>((subscriber: Subscriber<TabList>) =>
+				subscriber.next(tabList)).map(o => o);
+		} else {
+			return this.http.request('GET', baseUrl(ServiceTypes.webpy) + 'polarisappssvc/services.py/getuserappsconfigoptionswithusername/cjoubarn')
 				.map((res: Response) => {
-					const json_obj = res.json();
-					return deserialize(SearchInfo, json_obj['results'][0]);
+					tabList = deserialize(TabList, res);
+					this._ls._set('tabList', tabList);
+					return tabList;
 				})
 				.catch((error: any) => {
-					return Observable.throw(error.json().error || 'Server Error');
+					return Observable.throw(error.error || 'Server Error');
 				});
 		}
 	}
 }
-
